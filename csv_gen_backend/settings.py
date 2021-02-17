@@ -182,5 +182,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-DATASETS_ROOT = '/datasets/'
+DATASETS_ROOT = 'datasets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

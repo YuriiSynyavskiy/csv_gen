@@ -45,7 +45,7 @@ class SchemaApi(APIView):
                 col_filter = {
                     "from": column["from"],
                     "to": column["to"]
-                    }
+                }
             elif column.get('length', None):
                 col_filter = {
                     "length": column["length"]
@@ -81,7 +81,7 @@ class SchemaApi(APIView):
                 col_filter = {
                     "from": new_column["from"],
                     "to": new_column["to"]
-                    }
+                }
             elif new_column.get('length', None):
                 col_filter = {
                     "length": new_column["length"]
@@ -114,7 +114,7 @@ class SchemaApi(APIView):
                 upd_column.order = new_column["order"]
                 upd_column.col_type = new_column["col_type"]
             else:
-                upd_column = Column.objects.create(col_filter = new_column["col_filter"], 
+                upd_column = Column.objects.create(col_filter=new_column["col_filter"],
                                                    name=new_column["name"],
                                                    schema=schema,
                                                    order=new_column["order"],
@@ -204,6 +204,7 @@ class DataSetAPI(APIView):
     """
     Generate fake data
     """
+
     def get(self, request):
         dataset = Dataset.objects.get(id=request.query_params['id'])
         resp = {
@@ -212,9 +213,9 @@ class DataSetAPI(APIView):
             'status': dataset.status,
             'line_status': settings.REDIS_CONN.get(str(dataset.id)) or dataset.rows,
             'rows': dataset.rows,
-            }
+        }
         return Response(resp)
-    
+
     def post(self, request):
         serializer = DatasetSerializer(data=request.data)
         if serializer.is_valid():
@@ -235,11 +236,10 @@ def DownloadCSV(self, id):
     dataset = Dataset.objects.get(id=id)
     if not dataset.status == "Ready":
         raise Http404
-    path_to_file = DATASET_PATH.format(
-        path=str(settings.BASE_DIR)+settings.DATASETS_ROOT, id=dataset.id)
+    path_to_file = DATASET_PATH.format(settings.DATASETS_ROOT, id=dataset.id)
     f = open(path_to_file, 'rb')
     csv_file = File(f)
     response = HttpResponse(csv_file.read())
     response['Content-Disposition'] = 'attachment; filename="report.csv"'
-    response['Content-Type']='text/csv'
+    response['Content-Type'] = 'text/csv'
     return response

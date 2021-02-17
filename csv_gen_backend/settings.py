@@ -28,7 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost',
+                 'https://csv-gen-planeks.herokuapp.com/', 'csv-gen-planeks.herokuapp.com']
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
@@ -141,6 +142,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
+    'https://master.d2bxryo6wqbzm8.amplifyapp.com',
+    'https://master.d2bxryo6wqbzm8.amplifyapp.com/',
 ]
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

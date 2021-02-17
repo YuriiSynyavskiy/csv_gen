@@ -10,10 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-from redis import Redis
+from redis import Redis, from_url
 from pathlib import Path
 from dotenv import load_dotenv
-import connection_url
 
 
 load_dotenv()
@@ -99,7 +98,8 @@ SECRET_KEY = '1^wjxg_-8b!9vk*yvsx$^%%7d2d%ywp2&en2joz%p0fh@@3)f5'
 
 # Celery
 redis_host = os.environ.get('REDIS_HOST', 'localhost')
-REDIS_CONN = Redis(host=redis_host, port=os.environ.get('REDIS_PORT', 6379))
+REDIS_CONN = from_url(os.environ['REDIS_URL']) if os.environ.get(
+    'REDIS_URL', None) else Redis(host=redis_host, port=os.environ.get('REDIS_PORT', 6379))
 CELERY_BROKER_URL = os.environ.get(
     'REDIS_URL', None) or f'redis://{redis_host}:6379'
 CELERY_RESULT_BACKEND = os.environ.get(

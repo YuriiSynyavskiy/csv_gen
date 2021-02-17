@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
+import boto3
 from redis import Redis, from_url
 from pathlib import Path
 from dotenv import load_dotenv
@@ -143,7 +144,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'https://master.d2bxryo6wqbzm8.amplifyapp.com',
-    'https://master.d2bxryo6wqbzm8.amplifyapp.com/',
 ]
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -178,9 +178,7 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = '/static/'
 DATASETS_ROOT = 'datasets/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+S3_CLIENT = boto3.client('s3')

@@ -236,7 +236,7 @@ def DownloadCSV(self, id):
     dataset = Dataset.objects.get(id=id)
     if not dataset.status == "Ready":
         raise Http404
-    path_to_file = DATASET_PATH.format(settings.DATASETS_ROOT, id=dataset.id)
+    path_to_file = DATASET_PATH.format(path=settings.DATASETS_ROOT, id=dataset.id)
     f = open(path_to_file, 'rb')
     csv_file = File(f)
     response = HttpResponse(csv_file.read())

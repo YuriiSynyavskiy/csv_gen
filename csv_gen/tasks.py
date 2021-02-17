@@ -20,7 +20,7 @@ def generate_csv(dataset, schema):
     logger.info(
         f"Generate {dataset['rows']} rows for {schema['name']} schema. ")
     redis = settings.REDIS_CONN
-    with open(DATASET_PATH.format(settings.DATASETS_ROOT, id=dataset['id']), 'w') as csv_file:
+    with open(DATASET_PATH.format(path=settings.DATASETS_ROOT, id=dataset['id']), 'w') as csv_file:
         redis.set(str(dataset['id']), 0)
         dataset_writer = csv.writer(
             csv_file, delimiter=schema["delimeter"], quotechar=schema["quote"])
